@@ -16,6 +16,7 @@ public class SceneChange : MonoBehaviour
     }
     public void LoadScene(string SceneName)
     {
+        Debug.Log("butt clicked AISDFHAS " + SceneName);
         SceneManager.LoadScene(SceneName);
     }
 }

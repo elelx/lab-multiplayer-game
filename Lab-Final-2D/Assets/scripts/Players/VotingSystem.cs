@@ -36,6 +36,8 @@ public class VotingSystem : MonoBehaviour
 
     void Start()
     {
+       // votingPanel.SetActive(false);
+
         if (PlayerJoin.players.Count >= 3)
         {
             StartVoting();
