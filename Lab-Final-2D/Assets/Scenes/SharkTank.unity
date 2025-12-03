@@ -500,11 +500,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myChallenges:
-  - FART
-  - MEOW
-  - PIE
-  - HI ASA
-  - HI ELVA
+  - Draw two new cards on your turn to present, explain the murder alibi with those
+  - Start-up company pitch, use 2 cards.
+  - Your landlord is contemplating raising the rent. What do you give him?
+  - Your gay son received a mysterious box. What's inside?
+  - Your mother is blind and asks what you are looking at. Describe the scene using
+    3 cards
   textMeshPro: {fileID: 483227339}
 --- !u!4 &1084115002
 Transform:

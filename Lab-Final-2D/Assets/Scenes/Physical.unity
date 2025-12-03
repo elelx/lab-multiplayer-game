@@ -252,11 +252,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myChallenges:
-  - FART
-  - MEOW
-  - PIE
-  - HI ASA
-  - HI ELVA
+  - "Use your cards to have a RAP BATTLE, if you hesitate twice, you\u2019re OUT"
+  - " exercise : 5 push ups, 5 burpees \u2192 when finish click ur key"
+  - 'play Ninija, last one standing win '
+  - wipe out , balance on one leg ( DO WHATVER IT TAKES TO BE THE LAST ONE STANDING
+    )
+  - roll the die, grab the amount you rolled of one object
   textMeshPro: {fileID: 1725222877}
 --- !u!4 &596503588
 Transform:

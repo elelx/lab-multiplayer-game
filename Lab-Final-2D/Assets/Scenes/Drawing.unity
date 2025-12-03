@@ -480,11 +480,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myChallenges:
-  - FART
-  - MEOW
-  - PIE
-  - HI ASA
-  - HI ELVA
+  - Your cat is gone, draw her missing portrait, use 1 card explaining how she went
+    missing
+  - 'Dream horse, draw  '
+  - Create the next best meme. Make a drawing and draw a card to create the next
+    viral sensation
+  - High-brow art gallery, make a high-bidding art piece, choose a card for the title
+  - 'Kanye West''s newest single came out, make cover art, use a card for the title '
   textMeshPro: {fileID: 1625511885}
 --- !u!4 &1629197980
 Transform:
