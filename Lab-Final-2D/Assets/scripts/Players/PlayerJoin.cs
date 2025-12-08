@@ -22,9 +22,24 @@ public class PlayerJoin : MonoBehaviour
 
     public GameObject letsPlayButton;
 
+    Animator animA, animD, animG, animJ, animL;
+
+    void Awake()
+    {
+        animA = A.GetComponent<Animator>();
+        animD = D.GetComponent<Animator>();
+        animG = G.GetComponent<Animator>();
+        animJ = J.GetComponent<Animator>();
+        animL = L.GetComponent<Animator>();
+    }
+
+
     void Start()
     {
+        players.Clear();
+
         letsPlayButton.SetActive(false);
+     
     }
 
     void Update()
@@ -86,23 +101,24 @@ public class PlayerJoin : MonoBehaviour
     {
         if (key == KeyCode.A)
         {
-            A.SetActive(isActive);
+            animA.SetBool("isJoined", isActive);
+
         }
         if (key == KeyCode.D)
         {
-            D.SetActive(isActive);
+            animD.SetBool("isJoined", isActive);
         }
         if (key == KeyCode.G)
         {
-            G.SetActive(isActive);
+            animG.SetBool("isJoined", isActive);
         }
         if (key == KeyCode.J)
         {
-            J.SetActive(isActive);
+            animJ.SetBool("isJoined", isActive);
         }
         if (key == KeyCode.L)
         {
-            L.SetActive(isActive);
+            animL.SetBool("isJoined", isActive);
         }
     }
 
