@@ -1,0 +1,520 @@
+fileFormatVersion: 2
+guid: 4cf40a8cadffa498086dd93db66756b6
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4437932016660786029
+    second: snapeas-logo_0
+  - first:
+      213: 2679279057883641050
+    second: snapeas-logo_1
+  - first:
+      213: 8947054249869782209
+    second: snapeas-logo_2
+  - first:
+      213: -1479606350742062822
+    second: snapeas-logo_3
+  - first:
+      213: -5012134008394419713
+    second: snapeas-logo_4
+  - first:
+      213: -7361625695885773494
+    second: snapeas-logo_5
+  - first:
+      213: -7507169052724519907
+    second: snapeas-logo_6
+  - first:
+      213: 7241506793237009802
+    second: snapeas-logo_7
+  - first:
+      213: 3717327582982743115
+    second: snapeas-logo_8
+  - first:
+      213: -4733693952683246526
+    second: snapeas-logo_9
+  - first:
+      213: 7807139965911572824
+    second: snapeas-logo_10
+  - first:
+      213: -2680519815552923005
+    second: snapeas-logo_11
+  - first:
+      213: 1033536411595172368
+    second: snapeas-logo_12
+  - first:
+      213: -376288096911843605
+    second: snapeas-logo_13
+  - first:
+      213: -6152346483771973395
+    second: snapeas-logo_14
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: snapeas-logo_0
+      rect:
+        serializedVersion: 2
+        x: 1724
+        y: 1407
+        width: 134
+        height: 121
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 394d991185c4962c0800000000000000
+      internalID: -4437932016660786029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: snapeas-logo_1
+      rect:
+        serializedVersion: 2
+        x: 1958
+        y: 1412
+        width: 132
+        height: 117
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad43c439b16be2520800000000000000
+      internalID: 2679279057883641050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: snapeas-logo_2
+      rect:
+        serializedVersion: 2
+        x: 2622
+        y: 1411
+        width: 132
+        height: 131
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1cc23adcf625a2c70800000000000000
+      internalID: 8947054249869782209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: snapeas-logo_3
+      rect:
+        serializedVersion: 2
+        x: 2812
+        y: 1480
+        width: 119
+        height: 117
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a197b900dd1677be0800000000000000
+      internalID: -1479606350742062822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: snapeas-logo_4
+      rect:
+        serializedVersion: 2
+        x: 3016
+        y: 1505
+        width: 107
+        height: 102
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff1fefebca2517ab0800000000000000
+      internalID: -5012134008394419713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: snapeas-logo_5
+      rect:
+        serializedVersion: 2
+        x: 3221
+        y: 1222
+        width: 652
+        height: 653
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a453753ee6046d990800000000000000
+      internalID: -7361625695885773494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: snapeas-logo_6
+      rect:
+        serializedVersion: 2
+        x: 906
+        y: 1240
+        width: 150
+        height: 133
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d1c9c8f658d21d790800000000000000
+      internalID: -7507169052724519907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: snapeas-logo_7
+      rect:
+        serializedVersion: 2
+        x: 1161
+        y: 1257
+        width: 144
+        height: 123
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a855871bf000f7460800000000000000
+      internalID: 7241506793237009802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: snapeas-logo_8
+      rect:
+        serializedVersion: 2
+        x: 1514
+        y: 1302
+        width: 150
+        height: 147
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b44a271ddb9969330800000000000000
+      internalID: 3717327582982743115
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: snapeas-logo_9
+      rect:
+        serializedVersion: 2
+        x: 2154
+        y: 1313
+        width: 150
+        height: 145
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 24c76e22e6a8e4eb0800000000000000
+      internalID: -4733693952683246526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: snapeas-logo_10
+      rect:
+        serializedVersion: 2
+        x: 2455
+        y: 1303
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8512aeb5f68885c60800000000000000
+      internalID: 7807139965911572824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: snapeas-logo_11
+      rect:
+        serializedVersion: 2
+        x: 757
+        y: 1142
+        width: 108
+        height: 106
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 38a82940e61eccad0800000000000000
+      internalID: -2680519815552923005
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: snapeas-logo_12
+      rect:
+        serializedVersion: 2
+        x: 1368
+        y: 1143
+        width: 139
+        height: 147
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 01aef83f3ebd75e00800000000000000
+      internalID: 1033536411595172368
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: snapeas-logo_13
+      rect:
+        serializedVersion: 2
+        x: 2316
+        y: 1150
+        width: 140
+        height: 156
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bee9c5238f727caf0800000000000000
+      internalID: -376288096911843605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: snapeas-logo_14
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 11
+        width: 4323
+        height: 1091
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de0e5a338797e9aa0800000000000000
+      internalID: -6152346483771973395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      snapeas-logo_0: -4437932016660786029
+      snapeas-logo_1: 2679279057883641050
+      snapeas-logo_10: 7807139965911572824
+      snapeas-logo_11: -2680519815552923005
+      snapeas-logo_12: 1033536411595172368
+      snapeas-logo_13: -376288096911843605
+      snapeas-logo_14: -6152346483771973395
+      snapeas-logo_2: 8947054249869782209
+      snapeas-logo_3: -1479606350742062822
+      snapeas-logo_4: -5012134008394419713
+      snapeas-logo_5: -7361625695885773494
+      snapeas-logo_6: -7507169052724519907
+      snapeas-logo_7: 7241506793237009802
+      snapeas-logo_8: 3717327582982743115
+      snapeas-logo_9: -4733693952683246526
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
