@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 
@@ -13,15 +14,16 @@ public class VotingSystem : MonoBehaviour
     int voteJ = 0;
     int voteL = 0;
 
-    int scoreA = 0;
-    int scoreD = 0;
-    int scoreG = 0;
-    int scoreJ = 0;
-    int scoreL = 0;
+    public static int scoreA = 0;
+    public static int scoreD = 0;
+    public static int scoreG = 0;
+    public static int scoreJ = 0;
+    public static int scoreL = 0;
+
 
 
     int turn = 0;
-    int roundNumber = 0;
+    public static int roundNumber = 0;
 
     public GameObject votingPanel;
     public TMP_Text whoisvotin;
@@ -29,15 +31,38 @@ public class VotingSystem : MonoBehaviour
     public TMP_Text votereslt;
     public TMP_Text timerText;
 
+    bool isVoting = false;
+
+    public TMP_Text voterText;
+
+    public UnityEngine.UI.Image voterImage;
+
+    public Sprite iconA;
+    public Sprite iconD;
+    public Sprite iconG;
+    public Sprite iconJ;
+    public Sprite iconL;
+
+    public Transform voteOptionsParent;
+    public GameObject voteIconPrefab; 
+
 
     public float voteTimer = 10f;
 
+    public GameObject leaderboardPanel;
+    public TMP_Text leaderboardText;
+
+    public float leaderboardShowTime = 3f;
+
+    KeyCode lastVoter;
 
 
     void Start()
     {
-       // votingPanel.SetActive(false);
+         votingPanel.SetActive(false);
+        leaderboardPanel.SetActive(false);
 
+        voteTimer = 10f;
         if (PlayerJoin.players.Count >= 3)
         {
             StartVoting();
@@ -46,6 +71,7 @@ public class VotingSystem : MonoBehaviour
 
     void Update()
     {
+        if (!isVoting) return;
         if (PlayerJoin.players.Count < 3) return;
 
         if (turn >= PlayerJoin.players.Count)
@@ -54,10 +80,18 @@ public class VotingSystem : MonoBehaviour
             return;
         }
 
-        whoisvotin.text = PlayerJoin.players[turn] + " is voting...";
-
-
         KeyCode voterKey = PlayerJoin.players[turn];
+
+        if (voterKey != lastVoter)
+        {
+            voterText.text = "Player " + voterKey + " is voting";
+            voterImage.sprite = GetIcon(voterKey);
+
+            ShowVoteOptions(voterKey);
+            lastVoter = voterKey;
+        }
+
+
 
         voteTimer -= Time.deltaTime;
         timerText.text = Mathf.Ceil(voteTimer).ToString();
@@ -65,8 +99,9 @@ public class VotingSystem : MonoBehaviour
         if (voteTimer <= 0f)
         {
             votereslt.text = "time's up!";
-            turn+=1;
+            turn++;
             voteTimer = 10f;
+            votereslt.text = ""; 
             return;
         }
 
@@ -80,11 +115,23 @@ public class VotingSystem : MonoBehaviour
                 AddVote(targetKey);
 
                 turn+=1; //next voterrr
+                voteTimer = 10f;
 
                 return; 
             }
         }
     }
+
+    Sprite GetIcon(KeyCode key)
+    {
+        if (key == KeyCode.A) return iconA;
+        if (key == KeyCode.D) return iconD;
+        if (key == KeyCode.G) return iconG;
+        if (key == KeyCode.J) return iconJ;
+        if (key == KeyCode.L) return iconL;
+        return null;
+    }
+
 
     void AddVote(KeyCode who)
     {
@@ -134,25 +181,28 @@ public class VotingSystem : MonoBehaviour
 
         roundNumber++;
 
-        // every 5 rounds
-        if (roundNumber % 5 == 0) //the % reminder after dvidiesion if the number dvieded by 5 leaves no left over, then show the leader board
-        {
-            ShowLeaderboard();
-        }
+        ResetVotes();
+        turn = 0;
+
+        votereslt.text = "";
+        isVoting = false;
+        votingPanel.SetActive(false);
 
         if (roundNumber >= 15)
         {
             FinalWinner();
-
+            return;
         }
 
-        ResetVotes();
+        if (roundNumber % 5 == 0)
+        {
+            ShowLeaderboard(); 
+        }
+        else
+        {
+            StartVoting(); 
+        }
 
-        turn = 0;
-
-        votereslt.text = "";
-
-        votingPanel.SetActive(false);
 
     }
 
@@ -161,40 +211,36 @@ public class VotingSystem : MonoBehaviour
         voteA = voteD = voteG = voteJ = voteL = 0;
 
     }
+
     void ShowLeaderboard()
     {
-        Debug.Log("A " + scoreA);
-        Debug.Log("D" + scoreD);
-        Debug.Log("G " + scoreG);
-        Debug.Log("J " + scoreJ);
-        Debug.Log("L " + scoreL);
-
-        KeyCode leader = KeyCode.A;
-        int best = scoreA;
-
-        if (scoreD > best)
-        {
-            best = scoreD;
-            leader = KeyCode.D;
-        }
-        if (scoreG > best)
-        {
-            best = scoreG;
-            leader = KeyCode.G;
-        }
-        if (scoreJ > best)
-        {
-            best = scoreJ;
-            leader = KeyCode.J;
-        }
-        if (scoreL > best)
-        {
-            best = scoreL;
-            leader = KeyCode.L;
-        }
-
-        Debug.Log(" Leader: " + leader + " with " + best + " points");
+        StartCoroutine(LeaderboardRoutine());
     }
+
+    IEnumerator LeaderboardRoutine()
+    {
+        isVoting = false; 
+
+        leaderboardPanel.SetActive(true);
+
+        leaderboardText.text =
+            "LEADERBOARD\n\n" +
+            "A: " + scoreA + "\n" +
+            "D: " + scoreD + "\n" +
+            "G: " + scoreG + "\n" +
+            "J: " + scoreJ + "\n" +
+            "L: " + scoreL;
+
+        yield return new WaitForSeconds(leaderboardShowTime);
+
+        leaderboardPanel.SetActive(false);
+
+        if (PlayerJoin.players.Count >= 3)
+        {
+            StartVoting();
+        }
+    }
+
 
 
     void FinalWinner()
@@ -229,12 +275,35 @@ public class VotingSystem : MonoBehaviour
     public void StartVoting()
     {
         turn = 0;
+        voteTimer = 10f;
+        lastVoter = KeyCode.None; 
+
+        voteA = voteD = voteG = voteJ = voteL = 0;
+
         votereslt.text = "";
 
         votingPanel.SetActive(true);
+        isVoting = true;
+    
+}
+
+    void ShowVoteOptions(KeyCode voter)
+    {
+        foreach (Transform c in voteOptionsParent)
+            Destroy(c.gameObject);
+
+        foreach (KeyCode p in PlayerJoin.players)
+        {
+            GameObject icon = Instantiate(voteIconPrefab, voteOptionsParent);
+
+            icon.GetComponentInChildren<TMP_Text>().text = p.ToString();
+            icon.GetComponent<UnityEngine.UI.Image>().sprite = GetIcon(p);
+
+            if (p == voter)
+                icon.GetComponent<UnityEngine.UI.Image>().color = Color.gray;
+        }
 
     }
-
 
 
 }

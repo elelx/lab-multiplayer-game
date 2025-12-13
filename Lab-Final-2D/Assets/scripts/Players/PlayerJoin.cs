@@ -24,6 +24,8 @@ public class PlayerJoin : MonoBehaviour
 
     Animator animA, animD, animG, animJ, animL;
 
+
+
     void Awake()
     {
         animA = A.GetComponent<Animator>();
