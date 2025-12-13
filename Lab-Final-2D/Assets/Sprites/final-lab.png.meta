@@ -143,10 +143,10 @@ TextureImporter:
       name: final-lab_0
       rect:
         serializedVersion: 2
-        x: 173
-        y: 775
-        width: 553
-        height: 520
+        x: 0
+        y: 0
+        width: 800
+        height: 1525
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -165,10 +165,10 @@ TextureImporter:
       name: final-lab_1
       rect:
         serializedVersion: 2
-        x: 929
-        y: 782
-        width: 512
-        height: 583
+        x: 800
+        y: 0
+        width: 800
+        height: 1525
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,10 +187,10 @@ TextureImporter:
       name: final-lab_2
       rect:
         serializedVersion: 2
-        x: 1685
-        y: 745
-        width: 471
-        height: 593
+        x: 1600
+        y: 0
+        width: 800
+        height: 1525
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -209,10 +209,10 @@ TextureImporter:
       name: final-lab_3
       rect:
         serializedVersion: 2
-        x: 2458
-        y: 798
-        width: 584
-        height: 462
+        x: 2400
+        y: 0
+        width: 800
+        height: 1525
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -231,10 +231,10 @@ TextureImporter:
       name: final-lab_4
       rect:
         serializedVersion: 2
-        x: 3318
-        y: 626
-        width: 560
-        height: 609
+        x: 3200
+        y: 0
+        width: 800
+        height: 1525
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -249,121 +249,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: final-lab_5
-      rect:
-        serializedVersion: 2
-        x: 219
-        y: 134
-        width: 391
-        height: 600
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 8562f035624e514f0800000000000000
-      internalID: -858529300690819496
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: final-lab_6
-      rect:
-        serializedVersion: 2
-        x: 973
-        y: 134
-        width: 391
-        height: 600
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 87e8a27bbd68a9840800000000000000
-      internalID: 5231642195373231736
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: final-lab_7
-      rect:
-        serializedVersion: 2
-        x: 1765
-        y: 134
-        width: 391
-        height: 600
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6c4506ef45fc809b0800000000000000
-      internalID: -5113609412927269690
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: final-lab_8
-      rect:
-        serializedVersion: 2
-        x: 2577
-        y: 134
-        width: 391
-        height: 600
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a6a4932da150f1ac0800000000000000
-      internalID: -3882378741015819670
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: final-lab_9
-      rect:
-        serializedVersion: 2
-        x: 3411
-        y: 134
-        width: 391
-        height: 600
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 7fdcd01f058aee7d0800000000000000
-      internalID: -2887185245502845449
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 09be38950eea9455aa303542dfc7f415
     internalID: 0
     vertices: []
     indices: 
@@ -378,11 +268,6 @@ TextureImporter:
       final-lab_2: 6702576335271371598
       final-lab_3: 5861222483273231452
       final-lab_4: 7115868566771095877
-      final-lab_5: -858529300690819496
-      final-lab_6: 5231642195373231736
-      final-lab_7: -5113609412927269690
-      final-lab_8: -3882378741015819670
-      final-lab_9: -2887185245502845449
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

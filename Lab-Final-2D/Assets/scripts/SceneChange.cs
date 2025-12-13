@@ -19,4 +19,10 @@ public class SceneChange : MonoBehaviour
         Debug.Log("butt clicked AISDFHAS " + SceneName);
         SceneManager.LoadScene(SceneName);
     }
+
+    public void SceneEnded()
+    {
+        VotingSystem.roundJustPlayed = true;
+        SceneManager.LoadScene("CategorySplit");
+    }
 }

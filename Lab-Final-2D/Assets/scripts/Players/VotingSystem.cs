@@ -3,10 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 
-
-
 public class VotingSystem : MonoBehaviour
 {
+    public UnityEngine.UI.Image iconAImage;
+    public UnityEngine.UI.Image iconDImage;
+    public UnityEngine.UI.Image iconGImage;
+    public UnityEngine.UI.Image iconJImage;
+    public UnityEngine.UI.Image iconLImage;
+
+    public Sprite iconA;
+    public Sprite iconD;
+    public Sprite iconG;
+    public Sprite iconJ;
+    public Sprite iconL;
 
     int voteA = 0;
     int voteD = 0;
@@ -19,8 +28,6 @@ public class VotingSystem : MonoBehaviour
     public static int scoreG = 0;
     public static int scoreJ = 0;
     public static int scoreL = 0;
-
-
 
     int turn = 0;
     public static int roundNumber = 0;
@@ -37,16 +44,6 @@ public class VotingSystem : MonoBehaviour
 
     public UnityEngine.UI.Image voterImage;
 
-    public Sprite iconA;
-    public Sprite iconD;
-    public Sprite iconG;
-    public Sprite iconJ;
-    public Sprite iconL;
-
-    public Transform voteOptionsParent;
-    public GameObject voteIconPrefab; 
-
-
     public float voteTimer = 10f;
 
     public GameObject leaderboardPanel;
@@ -55,6 +52,11 @@ public class VotingSystem : MonoBehaviour
     public float leaderboardShowTime = 3f;
 
     KeyCode lastVoter;
+    public static bool roundJustPlayed = false;
+
+    bool ballotSwitch = false;
+    public Animator BAnim;
+    public float BAnimTime = 1.2f;
 
 
     void Start()
@@ -63,14 +65,17 @@ public class VotingSystem : MonoBehaviour
         leaderboardPanel.SetActive(false);
 
         voteTimer = 10f;
-        if (PlayerJoin.players.Count >= 3)
+
+        if (roundJustPlayed && PlayerJoin.players.Count >= 3)
         {
             StartVoting();
+            roundJustPlayed = false; 
         }
     }
 
     void Update()
     {
+        if (ballotSwitch) return;
         if (!isVoting) return;
         if (PlayerJoin.players.Count < 3) return;
 
@@ -87,11 +92,9 @@ public class VotingSystem : MonoBehaviour
             voterText.text = "Player " + voterKey + " is voting";
             voterImage.sprite = GetIcon(voterKey);
 
-            ShowVoteOptions(voterKey);
+           UpdateVoteSideIcons(voterKey);
             lastVoter = voterKey;
         }
-
-
 
         voteTimer -= Time.deltaTime;
         timerText.text = Mathf.Ceil(voteTimer).ToString();
@@ -112,15 +115,31 @@ public class VotingSystem : MonoBehaviour
 
             if (Input.GetKeyDown(targetKey))
             {
-                AddVote(targetKey);
-
-                turn+=1; //next voterrr
-                voteTimer = 10f;
-
+                StartCoroutine(VoteTransitionRoutine(targetKey));
                 return; 
             }
         }
     }
+
+    IEnumerator VoteTransitionRoutine(KeyCode targetKey)
+    {
+        ballotSwitch = true;
+        isVoting = false; 
+
+        AddVote(targetKey);
+
+        if (BAnim != null)
+            BAnim.SetTrigger("Flip");
+
+        yield return new WaitForSeconds(BAnimTime);
+
+        turn++;
+        voteTimer = 10f;
+
+        ballotSwitch = false;
+        isVoting = true;
+    }
+
 
     Sprite GetIcon(KeyCode key)
     {
@@ -142,6 +161,22 @@ public class VotingSystem : MonoBehaviour
         if (who == KeyCode.L) voteL+=1;
 
         votereslt.text = "voted for " + who;
+
+    }
+    public void StartVoting()
+    {
+        turn = 0;
+        voteTimer = 10f;
+        lastVoter = KeyCode.None;
+
+        voteA = voteD = voteG = voteJ = voteL = 0;
+
+        votereslt.text = "";
+
+       // BuildVoteSideIcons();
+
+        votingPanel.SetActive(true);
+        isVoting = true;
 
     }
 
@@ -181,30 +216,62 @@ public class VotingSystem : MonoBehaviour
 
         roundNumber++;
 
+        StartCoroutine(EndRoundRoutine(winner));
+
+    }
+
+    IEnumerator EndRoundRoutine(KeyCode winner)
+    {
+        isVoting = false;
+
+        votereslt.text = "Winner: " + winner;
+        yield return new WaitForSeconds(2f);
+
+        votingPanel.SetActive(false);
+        votereslt.text = "";
+
         ResetVotes();
         turn = 0;
 
-        votereslt.text = "";
-        isVoting = false;
-        votingPanel.SetActive(false);
-
-        if (roundNumber >= 15)
+        if (roundNumber % 5 == 0)
         {
-            FinalWinner();
+            ShowLeaderboard();
+        }
+
+    }
+
+    void UpdateVoteSideIcons(KeyCode voter)
+    {
+        UpdateSingleIcon(iconAImage, KeyCode.A, voter);
+        UpdateSingleIcon(iconDImage, KeyCode.D, voter);
+        UpdateSingleIcon(iconGImage, KeyCode.G, voter);
+        UpdateSingleIcon(iconJImage, KeyCode.J, voter);
+        UpdateSingleIcon(iconLImage, KeyCode.L, voter);
+    }
+
+    void UpdateSingleIcon(UnityEngine.UI.Image img, KeyCode key, KeyCode voter)
+    {
+        if (img == null) return;
+
+        img.gameObject.SetActive(true); 
+
+        if (!PlayerJoin.players.Contains(key))
+        {
+            img.color = new Color(1f, 1f, 1f, 0.3f); 
             return;
         }
 
-        if (roundNumber % 5 == 0)
+        if (key == voter)
         {
-            ShowLeaderboard(); 
+            img.color = Color.gray;
         }
         else
         {
-            StartVoting(); 
+            img.color = Color.white;
         }
-
-
     }
+
+
 
     void ResetVotes()
     {
@@ -234,11 +301,6 @@ public class VotingSystem : MonoBehaviour
         yield return new WaitForSeconds(leaderboardShowTime);
 
         leaderboardPanel.SetActive(false);
-
-        if (PlayerJoin.players.Count >= 3)
-        {
-            StartVoting();
-        }
     }
 
 
@@ -272,38 +334,6 @@ public class VotingSystem : MonoBehaviour
         Debug.Log("FINAL WINNER IS: " + winner);
     }
 
-    public void StartVoting()
-    {
-        turn = 0;
-        voteTimer = 10f;
-        lastVoter = KeyCode.None; 
-
-        voteA = voteD = voteG = voteJ = voteL = 0;
-
-        votereslt.text = "";
-
-        votingPanel.SetActive(true);
-        isVoting = true;
-    
-}
-
-    void ShowVoteOptions(KeyCode voter)
-    {
-        foreach (Transform c in voteOptionsParent)
-            Destroy(c.gameObject);
-
-        foreach (KeyCode p in PlayerJoin.players)
-        {
-            GameObject icon = Instantiate(voteIconPrefab, voteOptionsParent);
-
-            icon.GetComponentInChildren<TMP_Text>().text = p.ToString();
-            icon.GetComponent<UnityEngine.UI.Image>().sprite = GetIcon(p);
-
-            if (p == voter)
-                icon.GetComponent<UnityEngine.UI.Image>().color = Color.gray;
-        }
-
-    }
-
+ 
 
 }

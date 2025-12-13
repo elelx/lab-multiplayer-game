@@ -21,6 +21,7 @@ public class Timer : MonoBehaviour
         timerSeconds.text = timer.ToString("f2");
         if (timer <= 0)
         {
+            VotingSystem.roundJustPlayed = true;
             SceneManager.LoadScene(LeveltoLoad);
         }
     }
