@@ -110,9 +110,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 406
+        y: 0
         width: 1049
-        height: 349
+        height: 755
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -127,55 +127,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: frontgrass_1
-      rect:
-        serializedVersion: 2
-        x: 346
-        y: 0
-        width: 303
-        height: 486
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d8030445d73468f40800000000000000
-      internalID: 5730341781439000717
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: frontgrass_2
-      rect:
-        serializedVersion: 2
-        x: 659
-        y: 16
-        width: 159
-        height: 227
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 9b0fadd843565b960800000000000000
-      internalID: 7617105621159702713
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: a7b8306320278461fb105eeb45b2dd95
     internalID: 0
     vertices: []
     indices: 
@@ -186,8 +142,6 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       frontgrass_0: 5494703000813917555
-      frontgrass_1: 5730341781439000717
-      frontgrass_2: 7617105621159702713
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

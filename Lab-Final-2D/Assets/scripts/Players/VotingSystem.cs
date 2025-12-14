@@ -58,6 +58,9 @@ public class VotingSystem : MonoBehaviour
     public Animator BAnim;
     public float BAnimTime = 1.2f;
 
+    public MapMan mapManager;
+    public GameObject mapUI;    
+    public float mapShowTime = 2f;
 
     void Start()
     {
@@ -151,6 +154,18 @@ public class VotingSystem : MonoBehaviour
         return null;
     }
 
+    int KeyToPlayerIndex(KeyCode key)
+    {
+        if (key == KeyCode.A) return 0;
+        if (key == KeyCode.D) return 1;
+        if (key == KeyCode.G) return 2;
+        if (key == KeyCode.J) return 3;
+        if (key == KeyCode.L) return 4;
+
+        return -1;
+    }
+
+
 
     void AddVote(KeyCode who)
     {
@@ -178,7 +193,24 @@ public class VotingSystem : MonoBehaviour
         votingPanel.SetActive(true);
         isVoting = true;
 
+        RegisterMapPlayers();
+
     }
+
+    void RegisterMapPlayers()
+    {
+
+        foreach (KeyCode key in PlayerJoin.players)
+        {
+            int index = KeyToPlayerIndex(key);
+
+            if (index != -1)
+            {
+                mapManager.RegisterPlayer(index);
+            }
+        }
+    }
+
 
     void FinishVoting()
     {
@@ -222,6 +254,8 @@ public class VotingSystem : MonoBehaviour
 
     IEnumerator EndRoundRoutine(KeyCode winner)
     {
+        Debug.Log("END ROUND ROUTINE STARTED"); 
+
         isVoting = false;
 
         votereslt.text = "Winner: " + winner;
@@ -230,6 +264,24 @@ public class VotingSystem : MonoBehaviour
         votingPanel.SetActive(false);
         votereslt.text = "";
 
+
+        Debug.Log("TURNING MAP UI ON");
+
+
+        mapUI.SetActive(true);
+        Debug.Log("MAP UI ACTIVE: " + mapUI.activeSelf);
+
+        //  winner key to player index
+        int winnerIndex = KeyToPlayerIndex(winner);
+
+        // move winner up the map
+        mapManager.AdvancePlayer(winnerIndex);
+
+        yield return new WaitForSeconds(mapShowTime);
+
+        mapUI.SetActive(false);
+
+
         ResetVotes();
         turn = 0;
 
@@ -237,8 +289,8 @@ public class VotingSystem : MonoBehaviour
         {
             ShowLeaderboard();
         }
-
     }
+
 
     void UpdateVoteSideIcons(KeyCode voter)
     {
