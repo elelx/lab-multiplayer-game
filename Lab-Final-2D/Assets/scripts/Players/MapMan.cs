@@ -69,8 +69,7 @@ public void RebindMapUI(GameObject mapUI)
     foreach (RectTransform rt in allRects)
     {
         // Spots
-        if (rt.name == "0" || rt.name == "1" || rt.name == "2" ||
-            rt.name == "3" || rt.name == "4" || rt.name == "5" || rt.name == "6")
+        if (rt.name == "0" || rt.name == "1" || rt.name == "2")
         {
             spotList.Add(rt);
         }
