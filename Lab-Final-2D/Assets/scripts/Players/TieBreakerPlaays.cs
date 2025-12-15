@@ -48,6 +48,7 @@ public class TieBreakerPlaays : MonoBehaviour
 
         gameObject.SetActive(false);
 
+        //this will checkw ho is alive and the win scene will load 
         MiniGameMan.Instance.PlayerDied(playerIndex);
     }
 }
