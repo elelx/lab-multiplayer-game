@@ -1783,6 +1783,11 @@ MonoBehaviour:
     viral sensation
   - High-brow art gallery, make a high-bidding art piece, choose a card for the title
   - 'Kanye West''s newest single came out, make cover art, use a card for the title '
+  - Your grandma has a tattoo appointment. Draw the tattoo she requested (pull a
+    random card)
+  - Draw the new $1 bill design. Choose a card to determine to inspire design.
+  - Draw the new $1 bill design. Choose a card to determine to inspire design.
+  - An alien needs a Tinder profile picture. Choose a card for its special interest.
   textMeshPro: {fileID: 1625511885}
 --- !u!4 &1629197980
 Transform:

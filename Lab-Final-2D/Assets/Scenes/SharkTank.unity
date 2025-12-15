@@ -1649,6 +1649,13 @@ MonoBehaviour:
   - Your gay son received a mysterious box. What's inside?
   - Your mother is blind and asks what you are looking at. Describe the scene using
     3 cards
+  - Your therapist is quitting unless you invent a new coping mechanism. Use 2 cards
+    to pitch it.
+  - Your therapist is quitting unless you invent a new coping mechanism. Use 2 cards
+    to pitch it.
+  - You must convince TSA why the item in your bag (draw a random card) is NOT dangerous
+  - "You\u2019re opening a restaurant. Choose 2 cards: one is the signature dish,
+    one is the side effect. "
   textMeshPro: {fileID: 483227339}
 --- !u!4 &1084115002
 Transform:
