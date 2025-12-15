@@ -5,141 +5,234 @@ using UnityEngine.SceneManagement;
 
 public class MapMan : MonoBehaviour
 {
-    // All map nodes (Node_1 → Node_6)
-    public Transform[] nodes;
+    RectTransform[] spots;
+    RectTransform[] playerIcons;
 
-    // Player icons in order (A, D, G, J, L)
-    public Transform[] playerIcons;
 
-    // How long the icon moves between nodes
     public float moveTime = 1f;
 
-    // Delay before final scene loads
     public float finalDelay = 2f;
 
-    // Tracks what node each player is on
-    int[] playerNodeIndex;
+    int[] playerSpots;
 
-    // Tracks which players actually joined
     bool[] playerJoined;
 
-    // Stores finalists (max 2)
+
+    public bool mapInitialized = false;
+
+    public static MapMan Instance;
+
     List<int> finalists = new List<int>();
 
+    public string scenename;
 
     void Awake()
     {
-        // Initialize arrays based on player count
-        playerNodeIndex = new int[playerIcons.Length];
-        playerJoined = new bool[playerIcons.Length];
-
-        // Hide all icons at start
-        for (int i = 0; i < playerIcons.Length; i++)
+        if (Instance != null && Instance != this)
         {
-            playerIcons[i].gameObject.SetActive(false);
-            playerNodeIndex[i] = 0;
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+
+        DontDestroyOnLoad(gameObject);
+
+        if (playerSpots == null)
+        {
+            playerSpots = new int[5];
+            playerJoined = new bool[5];
+        }
+
+    }
+public void RebindMapUI(GameObject mapUI)
+{
+    if (mapUI == null)
+    {
+        Debug.LogError("mapUI is NULL");
+        return;
+    }
+
+    RectTransform[] allRects = mapUI.GetComponentsInChildren<RectTransform>(true);
+
+    List<RectTransform> spotList = new List<RectTransform>();
+
+    RectTransform iconA = null;
+    RectTransform iconD = null;
+    RectTransform iconG = null;
+    RectTransform iconJ = null;
+    RectTransform iconL = null;
+
+    foreach (RectTransform rt in allRects)
+    {
+        // Spots
+        if (rt.name == "0" || rt.name == "1" || rt.name == "2" ||
+            rt.name == "3" || rt.name == "4" || rt.name == "5" || rt.name == "6")
+        {
+            spotList.Add(rt);
+        }
+
+        // Icons (CASE SENSITIVE)
+        switch (rt.name)
+        {
+            case "A": iconA = rt; break;
+            case "D": iconD = rt; break;
+            case "G": iconG = rt; break;
+            case "J": iconJ = rt; break;
+            case "L": iconL = rt; break;
         }
     }
 
-    // Called by VotingSystem when a player joins
+    spots = spotList.ToArray();
+    playerIcons = new RectTransform[]
+    {
+        iconA,
+        iconD,
+        iconG,
+        iconJ,
+        iconL
+    };
+
+    Debug.Log($"Rebound Map UI | spots={spots.Length}, icons={playerIcons.Length}");
+
+    foreach (var icon in playerIcons)
+        if (icon != null)
+            icon.gameObject.SetActive(false);
+}
+
+
+
+
     public void RegisterPlayer(int playerIndex)
     {
+
+        if (playerIcons == null || spots == null) return;
+
+
+        if (playerJoined[playerIndex])
+            return;
+
         Debug.Log("Registered player index: " + playerIndex);
 
-        // Mark player as joined
         playerJoined[playerIndex] = true;
 
-        // Show their icon
         playerIcons[playerIndex].gameObject.SetActive(true);
 
-        // Place icon at Node 1
-        playerIcons[playerIndex].position = nodes[0].position;
+        playerSpots[playerIndex] = 0;
+        playerIcons[playerIndex].anchoredPosition = spots[0].anchoredPosition;
+
+
+
+
     }
 
-    // Called by VotingSystem when someone wins a round
+    public void RefreshIconPositions()
+    {
+        if (playerIcons == null || spots == null) return;
+
+
+        for (int i = 0; i < playerIcons.Length; i++)
+        {
+            if (!playerJoined[i]) continue;
+
+            playerIcons[i].gameObject.SetActive(true);
+            playerIcons[i].anchoredPosition = spots[playerSpots[i]].anchoredPosition;
+        }
+    }
+
+
     public void AdvancePlayer(int playerIndex)
     {
-        // Ignore players who never joined
-        if (!playerJoined[playerIndex])
-            return;
+        if (playerIndex < 0 || playerIndex >= playerIcons.Length) return;
 
-        // Stop if already at final node
-        if (playerNodeIndex[playerIndex] >= nodes.Length - 1)
-            return;
+        if (playerIcons == null || spots == null) return;
 
-        // Move player forward one node
-        playerNodeIndex[playerIndex]++;
 
-        // Animate movement
-        StartCoroutine(
-            MoveIcon(playerIndex, nodes[playerNodeIndex[playerIndex]].position)
-        );
+        if (!playerJoined[playerIndex]) return;
+        if (playerSpots[playerIndex] >= spots.Length - 1) return;
+
+        int from = playerSpots[playerIndex];
+        int to = from + 1;
+
+        playerSpots[playerIndex] = to;
+
+        StopAllCoroutines();
+        StartCoroutine(MoveIconUI(playerIndex, from, to));
     }
 
-    // Smoothly moves the icon to the next node
-    IEnumerator MoveIcon(int playerIndex, Vector3 target)
+    IEnumerator MoveIconUI(int playerIndex, int from, int to)
     {
-        Transform icon = playerIcons[playerIndex];
-        Vector3 start = icon.position;
+        RectTransform icon = playerIcons[playerIndex];
+
+        Vector2 start = spots[from].anchoredPosition;
+        Vector2 target = spots[to].anchoredPosition;
 
         float t = 0f;
 
-        // Lerp over time
         while (t < 1f)
         {
             t += Time.deltaTime / moveTime;
-            icon.position = Vector3.Lerp(start, target, t);
+            icon.anchoredPosition = Vector2.Lerp(start, target, t);
             yield return null;
         }
 
-        // Snap exactly to target
-        icon.position = target;
+        icon.anchoredPosition = target;
 
-        // Check if this player became a finalist
         CheckFinalist(playerIndex);
     }
 
-    // Checks if player reached final node
+
     void CheckFinalist(int playerIndex)
     {
-        // If player reached Node 6
-        if (playerNodeIndex[playerIndex] == nodes.Length - 1)
+        int finalSpot = spots.Length - 1;
+
+        if (playerSpots[playerIndex] != finalSpot)
+            return;
+
+        if (!finalists.Contains(playerIndex))
         {
-            // Avoid duplicates
-            if (!finalists.Contains(playerIndex))
-            {
-                finalists.Add(playerIndex);
-                Debug.Log("Player " + playerIndex + " is a finalist!");
-            }
-
-            // If we now have 2 finalists → endgame
-            if (finalists.Count == 2)
-            {
-                StartCoroutine(FinalShowdownDelay());
-            }
+            finalists.Add(playerIndex);
+            Debug.Log($"Player {playerIndex} reached final spot!");
         }
+
+        if (finalists.Count == 1)
+        {
+            GameWinner.winnerIndex = finalists[0];
+            SceneManager.LoadScene("WinScene");
+        }
+
+        if (!finalists.Contains(playerIndex))
+        {
+            finalists.Add(playerIndex);
+        }
+
+        if (finalists.Count == 2)
+        //{
+        //    TieBreakerData.tiedPlayers.Clear();
+        //    TieBreakerData.tiedPlayers.Add(finalists[0]);
+        //    TieBreakerData.tiedPlayers.Add(finalists[1]);
+
+            SceneManager.LoadScene("TieBreakerScene");
+        }
+
     }
 
-    // Waits, then loads final scene
-    IEnumerator FinalShowdownDelay()
-    {
-        Debug.Log("FINAL SHOWDOWN INCOMING");
 
-        // Small dramatic pause
-        yield return new WaitForSeconds(finalDelay);
+    //IEnumerator FinalShowdownDelay()
+    //{
+    //    Debug.Log("FINAL");
 
-        // finalists[0] and finalists[1] are your two players
+    //    yield return new WaitForSeconds(finalDelay);
 
-        Debug.Log("Finalists are: " + finalists[0] + " and " + finalists[1]);
 
-        // Clear old data just in case
-        FinalTwo.finalists.Clear();
+    //    Debug.Log("Finalists are: " + finalists[0] + " and " + finalists[1]);
 
-        // Store the two finalists
-        FinalTwo.finalists.Add(finalists[0]);
-        FinalTwo.finalists.Add(finalists[1]);
+    //    FinalTwo.finalists.Clear();
 
-        // Load final scene
-        SceneManager.LoadScene("FinalScene");
-    }
-}
+    //    FinalTwo.finalists.Add(finalists[0]);
+    //    FinalTwo.finalists.Add(finalists[1]);
+
+    //    SceneManager.LoadScene(scenename);
+    //}
+
+
+//}

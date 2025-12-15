@@ -67,6 +67,7 @@ public class VotingSystem : MonoBehaviour
          votingPanel.SetActive(false);
         leaderboardPanel.SetActive(false);
 
+        mapManager = MapMan.Instance;
         voteTimer = 10f;
 
         if (roundJustPlayed && PlayerJoin.players.Count >= 3)
@@ -193,8 +194,7 @@ public class VotingSystem : MonoBehaviour
         votingPanel.SetActive(true);
         isVoting = true;
 
-        RegisterMapPlayers();
-
+       
     }
 
     void RegisterMapPlayers()
@@ -259,7 +259,7 @@ public class VotingSystem : MonoBehaviour
         isVoting = false;
 
         votereslt.text = "Winner: " + winner;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
 
         votingPanel.SetActive(false);
         votereslt.text = "";
@@ -267,15 +267,26 @@ public class VotingSystem : MonoBehaviour
 
         Debug.Log("TURNING MAP UI ON");
 
-
         mapUI.SetActive(true);
-        Debug.Log("MAP UI ACTIVE: " + mapUI.activeSelf);
 
-        //  winner key to player index
+        mapManager.RebindMapUI(mapUI);
+
+        if (!mapManager.mapInitialized)
+        {
+            foreach (KeyCode key in PlayerJoin.players)
+            {
+                int index = KeyToPlayerIndex(key);
+                if (index != -1)
+                    mapManager.RegisterPlayer(index);
+            }
+            mapManager.mapInitialized = true;
+        }
+        mapManager.RefreshIconPositions();
+
         int winnerIndex = KeyToPlayerIndex(winner);
-
-        // move winner up the map
         mapManager.AdvancePlayer(winnerIndex);
+
+
 
         yield return new WaitForSeconds(mapShowTime);
 
