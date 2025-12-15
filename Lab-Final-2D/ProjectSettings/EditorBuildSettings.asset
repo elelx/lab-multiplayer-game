@@ -5,9 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/TitlePage.unity
+    guid: 90d040346449044ddbc7966b55e6ee99
   - enabled: 1
     path: Assets/Scenes/PlayerSelection.unity
     guid: a23276c0828bd4e0282adaa04c4e2f64
@@ -23,6 +26,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SharkTank.unity
     guid: 55087d31ba09d44a1a4886acd4a5ecd9
+  - enabled: 1
+    path: Assets/Scenes/MiniGame.unity
+    guid: b37f2f10b93d340ddadd8a196d445280
+  - enabled: 1
+    path: Assets/Scenes/WinScene.unity
+    guid: 5acf3d07cc3e74d3ba65cca21bd1753d
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
