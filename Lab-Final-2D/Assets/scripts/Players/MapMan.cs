@@ -26,6 +26,10 @@ public class MapMan : MonoBehaviour
 
     public string scenename;
 
+    bool graceActive = false;
+
+    int firstFinalist = -1;
+
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -188,54 +192,45 @@ public void RebindMapUI(GameObject mapUI)
         if (playerSpots[playerIndex] != finalSpot)
             return;
 
-        if (!finalists.Contains(playerIndex))
+        if (!graceActive)
+        {
+            firstFinalist = playerIndex;
+            finalists.Clear();
+            finalists.Add(playerIndex);
+
+            graceActive = true;
+            Debug.Log("First finalist: " + playerIndex);
+            return;
+        }
+
+        if (graceActive && !finalists.Contains(playerIndex))
         {
             finalists.Add(playerIndex);
-        }
+            Debug.Log("Second finalist: " + playerIndex);
 
-        if (finalists.Count == 1)
-        {
-            StartCoroutine(WaitForSecondFinalist());
+            TriggerTieBreaker();
         }
     }
 
-    IEnumerator WaitForSecondFinalist()
+    void TriggerTieBreaker()
     {
-        yield return new WaitForSeconds(1f); 
+        TieBreakers.tiedPlayers.Clear();
+        TieBreakers.tiedPlayers.Add(finalists[0]);
+        TieBreakers.tiedPlayers.Add(finalists[1]);
+
+        SceneManager.LoadScene("MiniGame");
+    }
+
+
+    public void EndRound()
+    {
+        if (!graceActive) return;
 
         if (finalists.Count == 1)
         {
-            GameWinner.winnerIndex = finalists[0];
+            GameWinner.winnerIndex = firstFinalist;
             SceneManager.LoadScene("WinScene");
-            yield break;
         }
-
-        if (finalists.Count >= 2)
-        {
-            TieBreakers.tiedPlayers.Clear();
-            TieBreakers.tiedPlayers.Add(finalists[0]);
-            TieBreakers.tiedPlayers.Add(finalists[1]);
-
-            SceneManager.LoadScene("TieBreakerScene");
-        }
-    }
-
-
-    IEnumerator FinalShowdownDelay()
-    {
-        Debug.Log("FINAL");
-
-        yield return new WaitForSeconds(finalDelay);
-
-
-        Debug.Log("Finalists are: " + finalists[0] + " and " + finalists[1]);
-
-        FinalTwo.finalists.Clear();
-
-        FinalTwo.finalists.Add(finalists[0]);
-        FinalTwo.finalists.Add(finalists[1]);
-
-        SceneManager.LoadScene(scenename);
     }
 
 

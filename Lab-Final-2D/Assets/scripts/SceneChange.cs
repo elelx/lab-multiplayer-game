@@ -24,5 +24,6 @@ public class SceneChange : MonoBehaviour
     {
         VotingSystem.roundJustPlayed = true;
         SceneManager.LoadScene("CategorySplit");
+
     }
 }

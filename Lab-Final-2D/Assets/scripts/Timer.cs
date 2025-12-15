@@ -13,6 +13,8 @@ public class Timer : MonoBehaviour
     public float HowmuchTimeLeftAlarmClock = 5f;
 
     [SerializeField] TextMeshProUGUI timerSeconds;
+    public AudioSource timesr;
+    public AudioClip timers;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -29,6 +31,8 @@ public class Timer : MonoBehaviour
         if (timer <= HowmuchTimeLeftAlarmClock)
         {
             TimerUI.SetActive(true);
+
+            timesr.PlayOneShot(timers);
 
         }
         if (timer <= 0)

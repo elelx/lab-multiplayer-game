@@ -22,9 +22,13 @@ public class PlayerJoin : MonoBehaviour
 
     public GameObject letsPlayButton;
 
+    public static bool allowJoining = true;
+
     Animator animA, animD, animG, animJ, animL;
 
-
+    public AudioSource fart;
+    public AudioClip fartS;
+    public AudioClip springS;
 
     void Awake()
     {
@@ -47,6 +51,7 @@ public class PlayerJoin : MonoBehaviour
     void Update()
     {
         // if u toggle, u toggle in and out of selection, this is how the list gets the char AdGJL
+        if (!allowJoining) return;
 
         CheckJoin(KeyCode.A);
         CheckJoin(KeyCode.D);
@@ -61,17 +66,29 @@ public class PlayerJoin : MonoBehaviour
     {
         if (Input.GetKeyDown(key))
         {
+            bool isJoining;
+
             if (players.Contains(key))
             {
                 players.Remove(key); //if already on list, remove duplicate
-
+                isJoining = false;
             }
             else
             {
                 players.Add(key);
+                isJoining = true;
 
-               
             }
+
+            if (isJoining)
+            {
+                fart.PlayOneShot(fartS);     
+            }
+            else
+            {
+                fart.PlayOneShot(springS);  
+            }
+
 
             UpdateUI(key, players.Contains(key));
 
@@ -85,6 +102,7 @@ public class PlayerJoin : MonoBehaviour
 
     void CheckStartButton()
     {
+
         if (players.Count >= 3)
         {
             letsPlayButton.SetActive(true);

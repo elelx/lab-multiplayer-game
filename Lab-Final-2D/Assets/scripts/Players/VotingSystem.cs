@@ -62,10 +62,20 @@ public class VotingSystem : MonoBehaviour
     public GameObject mapUI;    
     public float mapShowTime = 2f;
 
+    public AudioSource audioSource;
+    public AudioClip voteSound;
+
+
     void Start()
     {
          votingPanel.SetActive(false);
         leaderboardPanel.SetActive(false);
+
+        iconAImage.gameObject.SetActive(false);
+        iconDImage.gameObject.SetActive(false);
+        iconGImage.gameObject.SetActive(false);
+        iconJImage.gameObject.SetActive(false);
+        iconLImage.gameObject.SetActive(false);
 
         mapManager = MapMan.Instance;
         voteTimer = 10f;
@@ -178,9 +188,14 @@ public class VotingSystem : MonoBehaviour
 
         votereslt.text = "voted for " + who;
 
+        if (audioSource != null && voteSound != null)
+            audioSource.PlayOneShot(voteSound);
+
     }
     public void StartVoting()
     {
+        PlayerJoin.allowJoining = false;
+
         turn = 0;
         voteTimer = 10f;
         lastVoter = KeyCode.None;
@@ -189,12 +204,15 @@ public class VotingSystem : MonoBehaviour
 
         votereslt.text = "";
 
-       // BuildVoteSideIcons();
 
         votingPanel.SetActive(true);
         isVoting = true;
 
-       
+        Debug.Log("A joined? " + PlayerJoin.players.Contains(KeyCode.A));
+        iconAImage.gameObject.SetActive(false);
+
+
+
     }
 
     void RegisterMapPlayers()
@@ -316,25 +334,25 @@ public class VotingSystem : MonoBehaviour
     {
         if (img == null) return;
 
-        img.gameObject.SetActive(true); 
-
         if (!PlayerJoin.players.Contains(key))
         {
-            img.color = new Color(1f, 1f, 1f, 0.3f); 
+            img.gameObject.SetActive(false);
             return;
         }
 
+        img.gameObject.SetActive(true);
+
         if (key == voter)
         {
-            img.color = Color.gray;
+            img.color = Color.gray;   
         }
         else
         {
-            img.color = Color.white;
+            img.color = Color.white;  
         }
     }
 
-
+   
 
     void ResetVotes()
     {
