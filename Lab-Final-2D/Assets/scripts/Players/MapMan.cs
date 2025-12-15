@@ -191,48 +191,52 @@ public void RebindMapUI(GameObject mapUI)
         if (!finalists.Contains(playerIndex))
         {
             finalists.Add(playerIndex);
-            Debug.Log($"Player {playerIndex} reached final spot!");
         }
+
+        if (finalists.Count == 1)
+        {
+            StartCoroutine(WaitForSecondFinalist());
+        }
+    }
+
+    IEnumerator WaitForSecondFinalist()
+    {
+        yield return new WaitForSeconds(1f); 
 
         if (finalists.Count == 1)
         {
             GameWinner.winnerIndex = finalists[0];
             SceneManager.LoadScene("WinScene");
+            yield break;
         }
 
-        if (!finalists.Contains(playerIndex))
+        if (finalists.Count >= 2)
         {
-            finalists.Add(playerIndex);
-        }
-
-        if (finalists.Count == 2)
-        //{
-        //    TieBreakerData.tiedPlayers.Clear();
-        //    TieBreakerData.tiedPlayers.Add(finalists[0]);
-        //    TieBreakerData.tiedPlayers.Add(finalists[1]);
+            TieBreakers.tiedPlayers.Clear();
+            TieBreakers.tiedPlayers.Add(finalists[0]);
+            TieBreakers.tiedPlayers.Add(finalists[1]);
 
             SceneManager.LoadScene("TieBreakerScene");
         }
-
     }
 
 
-    //IEnumerator FinalShowdownDelay()
-    //{
-    //    Debug.Log("FINAL");
+    IEnumerator FinalShowdownDelay()
+    {
+        Debug.Log("FINAL");
 
-    //    yield return new WaitForSeconds(finalDelay);
-
-
-    //    Debug.Log("Finalists are: " + finalists[0] + " and " + finalists[1]);
-
-    //    FinalTwo.finalists.Clear();
-
-    //    FinalTwo.finalists.Add(finalists[0]);
-    //    FinalTwo.finalists.Add(finalists[1]);
-
-    //    SceneManager.LoadScene(scenename);
-    //}
+        yield return new WaitForSeconds(finalDelay);
 
 
-//}
+        Debug.Log("Finalists are: " + finalists[0] + " and " + finalists[1]);
+
+        FinalTwo.finalists.Clear();
+
+        FinalTwo.finalists.Add(finalists[0]);
+        FinalTwo.finalists.Add(finalists[1]);
+
+        SceneManager.LoadScene(scenename);
+    }
+
+
+}
